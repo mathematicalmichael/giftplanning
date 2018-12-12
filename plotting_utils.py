@@ -4,7 +4,7 @@ import numpy as np
 # import seaborn as sb
 from matplotlib import pyplot as plt
 import scipy.stats as ss
-
+import nbinteract as nbi
 
 primary_color = '#bdd363'
 secondary_color = '#60605d'
@@ -105,6 +105,7 @@ def makesliders(D):
                                 ipywidgets.Button(description='Preview')]))
     return slider_list
 
+
 def plot_current_dist(T, fname='tempfig', ftype='png', quartiles=True):
     p = T.selected_index
     
@@ -126,33 +127,51 @@ def plot_current_dist(T, fname='tempfig', ftype='png', quartiles=True):
     else:
         x = np.linspace(loc - 3.0*scale, loc + 3.0*scale, n)
     
-    fig = plt.figure()
+    
+    opts = {
+    'animation_duration': 250,
+    }
+
+    
+#     def x_values(max): 
+#         return np.arange(0, max)
+
+#     def y_values(xs, sd):
+#     return xs + np.random.normal(0, scale=sd, size=len(xs))
+    
+    
+    
+#     fig = plt.figure()
     # ax = fig.add_axes([0,0,1,1])
-    ax = fig.add_subplot(1,1,1)
-    ax.clear()
+#     ax = fig.add_subplot(1,1,1)
+#     ax.clear()
     if scale == 0: # if fixed constant,
         y = 0*x
-        plt.vlines(loc,0,1)
+#         plt.vlines(loc,0,1)
+        nbi.line([loc, loc], [0,1], options=opts)
     else:
         y = f.pdf(x)
-        ax.plot(x,y, color='cyan')
+#         ax.plot(x,y, color='cyan')
+        nbi.line(x, y, options=opts)
         if quartiles:
             q = f.ppf(np.array([0.25,0.5,0.75]).reshape(-1,1))
-            for z in q:
-                plt.scatter(z, f.pdf(z) ,marker='o', s=50)
-                plt.vlines(z, 0,f.pdf(z), lw=1, color='k')
-                plt.annotate(' %2.2f'%z, [z, f.pdf(z)*np.max(y)])
+#             for z in q:
+#                 plt.scatter(z, f.pdf(z) , marker='o', s=50)
+#                 plt.vlines(z, 0,f.pdf(z), lw=1, color='k')
+#                 plt.annotate(' %2.2f'%z, [z, f.pdf(z)*np.max(y)])
     paramstr = ' '.join([s.capitalize() for s in param.split('_')])
     paramstr = paramstr.replace('Per ', 'per ')
     paramstr = paramstr.replace('To ', 'to ')
     paramstr = paramstr.replace('In ', 'in ')
-    plt.xlabel('\n'+paramstr)
-    plt.ylabel("Relative Likelihood"+'\n')
-    plt.tight_layout()
-    plt.savefig(fname+paramstr.lower().replace(' ', '_')+'.'+ftype)
-    plt.show()
+    
+#     plt.xlabel('\n'+paramstr)
+#     plt.ylabel("Relative Likelihood"+'\n')
+#     plt.tight_layout()
+#     plt.savefig(fname+paramstr.lower().replace(' ', '_')+'.'+ftype)
+#     plt.show()
 
     pass
+
 
 def paramdict(items, params):
     return {i:{j: None for j in params} for i in items}
@@ -215,7 +234,7 @@ def makeTabs(S, preview=False):
             
         plt_prev = T.children[t].children[6]
         
-        @plt_prev.capture(clear_output=True, wait=True)
+#         @plt_prev.capture(clear_output=True, wait=True)
         def callbck(*kwds):
             tt = T.selected_index
             param = T.children[tt].children[0].value # string
@@ -240,29 +259,55 @@ def makeTabs(S, preview=False):
             else:
                 x = np.linspace(loc - 3.0*scale, loc + 3.0*scale, n)
             
-            fig = plt.figure()
-            ax = fig.add_axes([0,0,1,1])
-#             ax = fig.add_subplot(1,1,1)
-            #     ax.clear()
+            opts = {
+            'animation_duration': 250,
+            }
+
+
+
+        #     fig = plt.figure()
+            # ax = fig.add_axes([0,0,1,1])
+        #     ax = fig.add_subplot(1,1,1)
+        #     ax.clear()
             if scale == 0: # if fixed constant,
                 y = 0*x
-                plt.vlines(loc,0,1)
+        #         plt.vlines(loc,0,1)
+                nbi.line([loc, loc], [0,1], options=opts)
             else:
                 y = f.pdf(x)
-                ax.plot(x,y, color='cyan')
-                q = f.ppf(np.array([0.25,0.5,0.75]).reshape(-1,1))
-                quartiles = True # TODO: add this to the tab as an option.
-                if quartiles:
-                    for z in q:
-                        plt.scatter(z, f.pdf(z) ,marker='o', s=50)
-                        plt.vlines(z, 0,f.pdf(z), lw=1, color='k')
-                        plt.annotate(' %2.3f'%(z), [z, f.pdf(z)])
-            paramstr = ' '.join([s.capitalize() for s in param.split('_')])
-            paramstr = paramstr.replace('Per ', 'per ')
-            paramstr = paramstr.replace('To ', 'to ')
-            plt.xlabel('\n'+paramstr)
-            plt.ylabel("Relative Likelihood"+'\n')
-            plt.show()
+        #         ax.plot(x,y, color='cyan')
+                def y_values(): return y
+                def x_values(): return x
+                nbi.line(x_values, y_values, options=opts)
+#                 if quartiles:
+#                     q = f.ppf(np.array([0.25,0.5,0.75]).reshape(-1,1))
+        #             for z in q:
+        #                 plt.scatter(z, f.pdf(z) , marker='o', s=50)
+        #                 plt.vlines(z, 0,f.pdf(z), lw=1, color='k')
+        #                 plt.annotate(' %2.2f'%z, [z, f.pdf(z)*np.max(y)])
+#             fig = plt.figure()
+#             ax = fig.add_axes([0,0,1,1])
+# #             ax = fig.add_subplot(1,1,1)
+#             #     ax.clear()
+#             if scale == 0: # if fixed constant,
+#                 y = 0*x
+#                 plt.vlines(loc,0,1)
+#             else:
+#                 y = f.pdf(x)
+#                 ax.plot(x,y, color='cyan')
+#                 q = f.ppf(np.array([0.25,0.5,0.75]).reshape(-1,1))
+#                 quartiles = True # TODO: add this to the tab as an option.
+#                 if quartiles:
+#                     for z in q:
+#                         plt.scatter(z, f.pdf(z) ,marker='o', s=50)
+#                         plt.vlines(z, 0,f.pdf(z), lw=1, color='k')
+#                         plt.annotate(' %2.3f'%(z), [z, f.pdf(z)])
+#             paramstr = ' '.join([s.capitalize() for s in param.split('_')])
+#             paramstr = paramstr.replace('Per ', 'per ')
+#             paramstr = paramstr.replace('To ', 'to ')
+#             plt.xlabel('\n'+paramstr)
+#             plt.ylabel("Relative Likelihood"+'\n')
+#             plt.show()
             
             pass
         T.children[t].children[7].on_click(callbck) # assign callback to the preview button
