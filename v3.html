@@ -11875,7 +11875,7 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># HIDDEN</span>
 
-<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1E3</span><span class="p">)</span> 
+<span class="n">N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">5E3</span><span class="p">)</span> 
 
 <span class="n">D</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;donor_1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;dist&#39;</span><span class="p">:</span> <span class="s1">&#39;beta&#39;</span><span class="p">,</span>
    <span class="s1">&#39;kwds&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;loc&#39;</span><span class="p">:</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mf">40000.0</span><span class="p">}},</span>
@@ -12052,7 +12052,7 @@ div#notebook {
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="nd">@results_out</span><span class="o">.</span><span class="n">capture</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">show_result</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-    <span class="n">S</span> <span class="o">=</span> <span class="n">cbayes</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">generate_sample_set_from_dict</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span> 
+    <span class="n">S</span> <span class="o">=</span> <span class="n">cbayes</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">generate_sample_set_from_dict</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">N</span><span class="p">))</span> 
     <span class="n">V</span> <span class="o">=</span> <span class="n">cbayes</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">generate_sample_dict</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
     <span class="n">output</span> <span class="o">=</span> <span class="n">total</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">gifts</span><span class="p">)</span> <span class="c1"># proportion of day</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">gaussian_kde</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
@@ -12081,7 +12081,7 @@ div#notebook {
 
 <span class="n">calculate_button</span> <span class="o">=</span> <span class="n">wd</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Show Result&#39;</span><span class="p">)</span>
 <span class="n">calculate_button</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">show_result</span><span class="p">)</span>
-
+<span class="n">confidence_label</span> <span class="o">=</span> <span class="n">wd</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="s2">&quot;Confidence&quot;</span><span class="p">)</span>
 <span class="c1"># min_donation.observe(update_vals, &#39;value&#39;)</span>
 <span class="c1"># max_donation.observe(update_vals, &#39;value&#39;)</span>
 <span class="c1"># pessimism_amount.observe(update_vals, &#39;value&#39;)</span>
@@ -12139,10 +12139,10 @@ This interface is live and interactive (though running on limited computational 
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># HIDDEN</span>
 <span class="n">selection_interface</span> <span class="o">=</span> <span class="p">[</span><span class="n">min_donation</span><span class="p">,</span> <span class="n">max_donation</span><span class="p">,</span> <span class="n">optimism_amount</span><span class="p">,</span> <span class="n">pessimism_amount</span><span class="p">]</span>
-<span class="n">donor_interface</span> <span class="o">=</span> <span class="p">[</span><span class="n">dropdown_list</span><span class="p">,</span> <span class="n">wd</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="s1">&#39;Confidence&#39;</span><span class="p">),</span> <span class="n">optimism_confidence</span><span class="p">,</span> <span class="n">pessimism_confidence</span><span class="p">]</span>
+<span class="n">donor_interface</span> <span class="o">=</span> <span class="p">[</span><span class="n">dropdown_list</span><span class="p">,</span> <span class="n">confidence_label</span><span class="p">,</span> <span class="n">optimism_confidence</span><span class="p">,</span> <span class="n">pessimism_confidence</span><span class="p">]</span>
 <span class="n">button_interface</span> <span class="o">=</span> <span class="p">[</span><span class="n">preview_button</span><span class="p">,</span> <span class="n">write_button</span><span class="p">,</span> <span class="n">calculate_button</span><span class="p">]</span>
-<span class="n">final_out</span> <span class="o">=</span> <span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span> <span class="n">wd</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">donor_interface</span><span class="p">),</span> <span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">label_list</span><span class="p">),</span> <span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">selection_interface</span><span class="p">)]),</span> 
-        <span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span> <span class="n">plot_out</span><span class="p">,</span> <span class="n">results_out</span><span class="p">,</span> <span class="n">wd</span><span class="o">.</span><span class="n">HBox</span><span class="p">(</span><span class="n">button_interface</span><span class="p">)</span> <span class="p">])</span> <span class="p">])</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span> <span class="n">wd</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">donor_interface</span><span class="p">),</span> <span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">label_list</span><span class="p">),</span> <span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">selection_interface</span><span class="p">)]),</span> 
+        <span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span> <span class="n">wd</span><span class="o">.</span><span class="n">HBox</span><span class="p">(</span><span class="n">button_interface</span><span class="p">),</span> <span class="n">plot_out</span><span class="p">,</span> <span class="n">results_out</span> <span class="p">])</span> <span class="p">])</span>
 </pre></div>
 
     </div>
@@ -12159,31 +12159,10 @@ This interface is live and interactive (though running on limited computational 
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">final_out</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">predictions</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    
-
-
-
-  <div class="output_subarea output_widget_view ">
-    <button class="js-nbinteract-widget">
-      Loading widgets...
-    </button>
-  </div>
-
-</div>
-
 </div>
 </div>
 
