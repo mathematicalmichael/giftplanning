@@ -12040,6 +12040,7 @@ div#notebook {
     <span class="n">A</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">%2.1f</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">scaling_x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_labels</span><span class="p">])</span>
     <span class="n">A</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Amount</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">sc</span>aling_label<span class="o">)</span>
     <span class="n">C</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Confidence&quot;</span><span class="p">)</span>
+    <span class="n">C</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
     <span class="n">C</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;middle&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">])</span>
 
     <span class="n">display</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -12140,11 +12141,49 @@ This interface is live and interactive (though running on limited computational 
 <span class="n">selection_interface</span> <span class="o">=</span> <span class="p">[</span><span class="n">min_donation</span><span class="p">,</span> <span class="n">max_donation</span><span class="p">,</span> <span class="n">optimism_amount</span><span class="p">,</span> <span class="n">pessimism_amount</span><span class="p">]</span>
 <span class="n">donor_interface</span> <span class="o">=</span> <span class="p">[</span><span class="n">dropdown_list</span><span class="p">,</span> <span class="n">wd</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="s1">&#39;Confidence&#39;</span><span class="p">),</span> <span class="n">optimism_confidence</span><span class="p">,</span> <span class="n">pessimism_confidence</span><span class="p">]</span>
 <span class="n">button_interface</span> <span class="o">=</span> <span class="p">[</span><span class="n">preview_button</span><span class="p">,</span> <span class="n">write_button</span><span class="p">,</span> <span class="n">calculate_button</span><span class="p">]</span>
-<span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span> <span class="n">wd</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">donor_interface</span><span class="p">),</span> <span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">label_list</span><span class="p">),</span> <span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">selection_interface</span><span class="p">)]),</span> 
+<span class="n">final_out</span> <span class="o">=</span> <span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span> <span class="n">wd</span><span class="o">.</span><span class="n">HBox</span><span class="p">([</span><span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">donor_interface</span><span class="p">),</span> <span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">label_list</span><span class="p">),</span> <span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">(</span><span class="n">selection_interface</span><span class="p">)]),</span> 
         <span class="n">wd</span><span class="o">.</span><span class="n">VBox</span><span class="p">([</span> <span class="n">plot_out</span><span class="p">,</span> <span class="n">results_out</span><span class="p">,</span> <span class="n">wd</span><span class="o">.</span><span class="n">HBox</span><span class="p">(</span><span class="n">button_interface</span><span class="p">)</span> <span class="p">])</span> <span class="p">])</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+  </div>
+
+  
+
+  <div class="
+      cell border-box-sizing code_cell rendered">
+    <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">final_out</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    
+
+
+
+  <div class="output_subarea output_widget_view ">
+    <button class="js-nbinteract-widget">
+      Loading widgets...
+    </button>
+  </div>
+
+</div>
+
 </div>
 </div>
 
