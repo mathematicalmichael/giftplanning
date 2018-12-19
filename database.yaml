@@ -1,0 +1,21 @@
+donor_1:
+  amount:
+    dist: beta
+    kwds: {a: 1.0, b: 4.5, loc: 100, scale: 49900}
+  confidence:
+    dist: beta
+    kwds: {a: 6.0, b: 3.0, loc: 0, scale: 1}
+donor_2:
+  amount:
+    dist: beta
+    kwds: {a: 1.5, b: 3.0, loc: 10000, scale: 40000}
+  confidence:
+    dist: beta
+    kwds: {a: 3.0, b: 1.5, loc: 0, scale: 1}
+donor_3:
+  amount:
+    dist: beta
+    kwds: {a: 7.25, b: 3.0, loc: 10000, scale: 241000}
+  confidence:
+    dist: beta
+    kwds: {a: 2.25, b: 7.0, loc: 0, scale: 1}
