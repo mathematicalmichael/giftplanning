@@ -1,3 +1,4 @@
 cbayes
 ipywidgets
 nbinteract
+yaml
